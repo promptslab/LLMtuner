@@ -1,4 +1,4 @@
-from llmtuner import InstructionDataset, Model, Tuner
+from llmtuner import InstructionDataset, Model, Tuner, Estimater, UI
 
 # Load the dataset
 instruction_dataset = InstructionDataset("./alpaca_data")
@@ -16,6 +16,12 @@ output = model.inference(texts=["Why LLM models are becoming so important?"])
 
 # Save the model
 model.save("llama_lora")
+
+#calcuate estimate cost to deply the model
+Estimater(model)
+
+#play with model on UI
+#UI(model)
 
 # deploy the model and return the endpoint
 endpoint = model.deploy("llama_lora", "s3://llama_lora")
