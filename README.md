@@ -5,7 +5,7 @@
 <h2 align="center">LLMTuner</h2> -->
 
 <p align="center">
-  <p align="center">LLMTuner: Optimize Llama, Whisper, and other LLMs with best practices like LoRA, QLoRA, through a sleek, scikit-learn-inspired interface.
+  <p align="center">LLMTuner: Fine-Tune Llama, Whisper, and other LLMs with best practices like LoRA, QLoRA, through a sleek, scikit-learn-inspired interface.
 </p>
 </p>
 
