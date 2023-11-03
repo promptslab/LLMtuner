@@ -1,6 +1,6 @@
 <div align="center">
 <img width="220px" src="https://raw.githubusercontent.com/promptslab/LLMTuner/main/assets/logo.png">
-<h1>LLM Tuner</h1></div>
+<h1>LLMTuner</h1></div>
 <!-- 
 <h2 align="center">LLMTuner</h2> -->
 
