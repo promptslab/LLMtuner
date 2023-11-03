@@ -23,3 +23,24 @@
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="colab" />
   </a>
 </h4>
+
+
+## Installation
+
+### With pip
+
+This repository is tested on Python 3.7+
+
+You should install Promptify using Pip command
+
+```bash
+pip3 install git+https://github.com/promptslab/LLMTuner.git
+```
+
+## Quick tour
+
+To fine a LLM model we provide the `Tuner` API.
+
+```python
+from llmtuner import 
+```
