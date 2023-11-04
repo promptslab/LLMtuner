@@ -81,8 +81,7 @@ class WhisperModelTrainer(BaseTrainer):
             'eval_steps': 5,
             'logging_steps': 5,
             'report_to': ["wandb"],
-            'load_best_model_at_end': True,
-            'push_to_hub': True
+            'load_best_model_at_end': True
         }
 
         combined_args = {**default_args, **training_args_dict} if training_args_dict else default_args
