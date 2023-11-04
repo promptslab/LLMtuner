@@ -74,18 +74,21 @@ deploy.launch()
 
 <h2>Features 🤖 </h2>
 <ul>
-  <li>Fine-tune state-of-the-art models like Whisper, Llama, Llama-2 with just 2 lines of code 💪</li>
-  <li>Launch a customizable UI to demo your models with one click ⚡️</li>
-  <li>Make inferences quickly without needing to write separate inference code 🏎️</li>
-  <li>Coming soon: One-click deployment to share your models with the world 🌍</li> 
+  <li>🏋️‍♂️ Effortless Fine-Tuning: Finetune state-of-the-art LLMs like Whisper, Llama with minimal code</li>
+  <li>⚡️ Built-in utilities for techniques like LoRA and QLoRA <li>
+  <li>⚡️ Interactive UI: Launch webapp demos for your finetuned models with one click</li>
+  <li>🏎️ Simplified Inference: Fast inference without separate code</li>
+  <li>🌐 Deployment Readiness: (Coming Soon) Deploy your models with minimal effort to aws, gcp etc, ready to share with the world.</li> 
 </ul>
+
+
 
 ### Supporting wide-range of Prompt-Based NLP tasks :
 
 | Task Name | Colab Notebook | Status |
 |-------------|-------|-------|
-| Fine-Tune Whisper | [Fine-Tune Whisper](#) | ✅  |
-| Fine-Tune Whisper Qunatinized | [#) | ✅    |
+| Fine-Tune Whisper | [Fine-Tune Whisper](https://colab.research.google.com/drive/1j_1AcPRk4s1uivVRSwrsOfodjPv55Jpc?usp=sharing) | ✅  |
+| Fine-Tune Whisper Quantized  | [LoRA](https://colab.research.google.com/drive/1j_1AcPRk4s1uivVRSwrsOfodjPv55Jpc?usp=sharing) | ✅    |
 | Fine-Tune Llama | [Coming soon..](#) | ✅    |
 
 
