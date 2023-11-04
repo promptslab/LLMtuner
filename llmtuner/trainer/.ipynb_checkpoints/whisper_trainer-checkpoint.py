@@ -56,12 +56,7 @@ class WhisperModelTrainer(BaseTrainer):
                  output_dir = None):
         
         super().__init__(output_dir, task)
-        
         self.model      = model
-        
-        self.model_name = self.model.model_name_or_path
-        self.task       = self.model.task
-        self.use_peft   = self.model.use_peft
         self.processed_data = processed_data
         self.processor = processor
         self.trainer = None
@@ -77,7 +72,7 @@ class WhisperModelTrainer(BaseTrainer):
             'warmup_steps': 10,
             'max_steps': 10,
             'gradient_checkpointing': True,
-            # 'fp16': True,
+            'fp16': True,
             'evaluation_strategy': "steps",
             'per_device_eval_batch_size': 8,
             'generation_max_length': 225,
