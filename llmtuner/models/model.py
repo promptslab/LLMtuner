@@ -2,11 +2,14 @@ from llmtuner.models.whisper_model import WhisperModel
 from llmtuner.models.peft_whisper import PeftWhisperModel
 
 class Model:
-    def __init__(self, model_name_or_path, language="Hindi", task="transcribe", use_peft=False, 
+    def __init__(self, model_name_or_path, language="Hindi", 
+                 language_abbr = 'hi',
+                 task="transcribe", use_peft=False, 
                  peft_config=None, quantization_config=None):
         
         self.model_name_or_path = model_name_or_path
         self.language = language
+        self.language_abbr = language_abbr
         self.task = task
         self.use_peft = use_peft
         self.peft_config = peft_config

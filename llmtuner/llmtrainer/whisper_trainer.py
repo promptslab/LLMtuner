@@ -15,8 +15,6 @@ from transformers import (
     pipeline,
 )
 
-
-
 @dataclass
 class DataCollatorSpeechSeq2SeqWithPadding:
     processor: Any
@@ -55,18 +53,16 @@ class WhisperModelTrainer(BaseTrainer):
     def __init__(self, model, 
                  processed_data,
                  processor,
-                 language_abbr = 'hi', 
-                 task = 'transcribe', 
-                 use_peft = False, 
                  output_dir = None):
         
         super().__init__(output_dir, task)
         self.model = model
-        self.language_abbr = language_abbr
+        self.language_abbr = self.model.language_abbr
+        self.task = self.model.task
+        self.use_peft = self.model.use_peft
         self.processed_data = processed_data
         self.processor = processor
-        self.use_peft = use_peft
-        self.trainer = None  # Will be initialized in setup_trainer
+        self.trainer = None
         self.wer_metrics = WERMetrics(self.processor.tokenizer)
 
     def setup_trainer(self, training_args_dict=None):
