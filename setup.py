@@ -10,7 +10,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/promptslab/LLMTuner',
     packages=find_packages(),
-    install_requires=['datasets>=2.6.1', 'transformers', 'librosa', 'evaluate>=0.30', 'jiwer', 'gradio==3.37', 'accelerate', 'wandb', 'peft', 'bitsandbytes'],
+    install_requires=['datasets', 'transformers', 'librosa', 'evaluate', 'jiwer', 'gradio==3.37', 'accelerate', 'wandb', 'peft', 'bitsandbytes'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
