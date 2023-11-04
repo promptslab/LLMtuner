@@ -55,12 +55,13 @@ class WhisperModelTrainer(BaseTrainer):
                  processor,
                  output_dir = None):
         
-        super().__init__(output_dir, task)
+        super().__init__(output_dir)
         self.model      = model
         self.processed_data = processed_data
         self.processor = processor
         self.trainer = None
         self.wer_metrics = WERMetrics(self.processor.tokenizer)
+        self.model_saved_path = None
 
     def setup_trainer(self, training_args_dict=None):
         # Define default arguments for training
@@ -112,7 +113,8 @@ class WhisperModelTrainer(BaseTrainer):
         )
 
         # Save the processor
-        self.processor.processor.save_pretrained(training_args.output_dir)
+        self.processor.save_pretrained(training_args.output_dir)
+        self.model_saved_path = training_args.output_dir
 
     def start_training(self):
         # Implement the specific training loop for Whisper or PEFT models

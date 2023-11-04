@@ -12,9 +12,13 @@ class WhisperModel(BaseModel):
 
     def load(self):
         if not self.model:
+
+            
             self.model = WhisperForConditionalGeneration.from_pretrained(self.model_name_or_path)
             self.model.config.forced_decoder_ids = None
             self.model.config.suppress_tokens = []
+            self.model.is_peft_applied = False
+            self.is_peft_applied = self.model.is_peft_applied
         return self.model
     
     def save(self, save_path, *args, **kwargs):
