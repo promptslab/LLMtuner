@@ -54,7 +54,7 @@ class ASRTranscriptionPipeline(BaseTranscriptionPipeline):
 
 class GenericTranscriptionPipeline(BaseTranscriptionPipeline):
     def __init__(self, model_name):
-        self.pipe = pipeline(model=model_name)
+        self.pipe = pipeline("automatic-speech-recognition", model=model_name)
 
     def transcribe(self, audio_path):
         result = self.pipe(audio_path)
