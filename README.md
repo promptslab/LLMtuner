@@ -73,7 +73,7 @@ deploy.launch()
 
 <h2>Features 🤖 </h2>
 <ul>
-  <li>🏋️‍♂️ **Effortless Fine-Tuning**: Finetune state-of-the-art LLMs like Whisper, Llama with minimal code</li>
+  <li>🏋️‍♂️ ###Effortless Fine-Tuning: Finetune state-of-the-art LLMs like Whisper, Llama with minimal code</li>
   <li>⚡️ Built-in utilities for techniques like LoRA and QLoRA </li>
   <li>⚡️ Interactive UI: Launch webapp demos for your finetuned models with one click</li>
   <li>🏎️ Simplified Inference: Fast inference without separate code</li>
