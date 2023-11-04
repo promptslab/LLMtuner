@@ -82,7 +82,7 @@ deploy.launch()
 
 
 
-### Supporting wide-range of Prompt-Based NLP tasks :
+### Supported Models :
 
 | Task Name | Colab Notebook | Status |
 |-------------|-------|-------|
