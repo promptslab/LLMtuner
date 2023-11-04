@@ -1,5 +1,5 @@
 from llmtuner.models.whisper_model import WhisperModel
-from llmtuner.llmtrainer.whisper_trainer import WhisperModelTrainer
+from llmtuner.trainer.whisper_trainer import WhisperModelTrainer
 from llmtuner.Inference.inference_pipeline import WhisperEval
 from llmtuner.dataset.whisper_data import AudioDatasetProcessor
 import gradio as gr
@@ -17,16 +17,9 @@ class Tuner:
     def fit(self):
         # Load and initialize the model
         model = self.model_.load_model()
-
-        if self.dataset.dummy_data:
-            loaded_data = self.dataset.load_dummy_data(type_ = self.dataset.type_)
-        else:
-            loaded_data = self.dataset.load_local_datasets(self, train_dir= self.dataset.train_dir, 
-                                                            test_dir= self.dataset.test_dir)
-        
         self.processor = AudioDatasetProcessor(self.model_.model_name_or_path)
         # Preprocess the dataset
-        processed_dataset = self.processor.preprocess_data(loaded_data)
+        processed_dataset = self.processor.preprocess_data(self.dataset)
 
         # Initialize and set up the trainer
         trainer = WhisperModelTrainer(model, processed_dataset, self.processor)

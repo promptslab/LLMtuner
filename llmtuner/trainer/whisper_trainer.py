@@ -1,4 +1,4 @@
-from llmtuner.llmtrainer.base_trainer import BaseTrainer
+from llmtuner.trainer.base_trainer import BaseTrainer
 from llmtuner.Inference.metrices import WERMetrics
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
@@ -56,10 +56,12 @@ class WhisperModelTrainer(BaseTrainer):
                  output_dir = None):
         
         super().__init__(output_dir, task)
-        self.model = model
-        self.language_abbr = self.model.language_abbr
-        self.task = self.model.task
-        self.use_peft = self.model.use_peft
+        
+        self.model      = model
+        
+        self.model_name = self.model.model_name_or_path
+        self.task       = self.model.task
+        self.use_peft   = self.model.use_peft
         self.processed_data = processed_data
         self.processor = processor
         self.trainer = None
@@ -91,7 +93,7 @@ class WhisperModelTrainer(BaseTrainer):
         training_args = Seq2SeqTrainingArguments(**combined_args)
 
         # Customize the training arguments based on the type of model
-        if self.use_peft:
+        if self.model.is_peft_applied:
             # Settings specific to PEFT model
             training_args.label_names = ["labels"]
             training_args.remove_unused_columns = False
@@ -122,15 +124,13 @@ class WhisperModelTrainer(BaseTrainer):
         self.trainer.train()
 
     def push_to_hub(self, hub_push_kwargs=None):
-        
         hub_push_kwargs_default = {
-            "language": self.language_abbr,
+            "language": 'hi',
             "model_name": self.output_dir,
             "finetuned_from": self.model_name,
             "tasks": "automatic-speech-recognition",
             "tags": self.task,
         }
-
         hub_combined_args = {**hub_push_kwargs_default, **hub_push_kwargs} if hub_push_kwargs else hub_push_kwargs_default
 
         # Call the base class's push_to_hub with combined arguments

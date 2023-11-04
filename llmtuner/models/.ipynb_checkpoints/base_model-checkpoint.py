@@ -1,4 +1,9 @@
 class BaseModel:
+
+    def __init__(self):
+        self.is_peft_applied = False
+        # Any other initializations can go here
+
     def load(self, model_path, *args, **kwargs):
         """
         Load the model from a specified path.

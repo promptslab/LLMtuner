@@ -19,9 +19,3 @@ class WhisperModel(BaseModel):
     
     def save(self, save_path, *args, **kwargs):
         self.model.save_pretrained(save_path, from_pt=True)
-
-
-
-
-
-    

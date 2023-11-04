@@ -10,20 +10,19 @@ from typing import Any, Dict, List, Union
 from .base_dataset import BaseDatasetProcessor
 
 class AudioDatasetProcessor(BaseDatasetProcessor):
-    def __init__(self, model):
+    def __init__(self, model_name, language, task):
         
         super().__init__()
-        self.model_ = model
-        self.language = self.model_.language
-        self.language_abbr = self.model_.language_abbr
-        self.task = self.model_.task
+        self.model_name = model_name
+        self.language   = language
+        self.task = task
         
-        self.feature_extractor = WhisperFeatureExtractor.from_pretrained(self.model_.model_name_or_path)
+        self.feature_extractor = WhisperFeatureExtractor.from_pretrained(self.model_name)
         self.tokenizer = WhisperTokenizer.from_pretrained(
-            self.model_, language=self.language, task=self.task
+            self.model_name, language=self.language, task=self.task
         )
         self.processor = WhisperProcessor.from_pretrained(
-            self.model_, language=self.language, task=self.task
+            self.model_name, language=self.language, task=self.task
         )
 
     def preprocess_data(self, hf_audio_object):
@@ -36,7 +35,7 @@ class AudioDatasetProcessor(BaseDatasetProcessor):
             num_proc=2,
         )
         
-        return audio_data
+        return audio_data, self.processor
 
     def _prepare_dataset(self, batch):
         audio = batch["audio"]

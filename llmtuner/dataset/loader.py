@@ -1,51 +1,33 @@
-from datasets import load_dataset, concatenate_datasets, DatasetDict
+from datasets import load_dataset, DatasetDict
 
 class Dataset:
-    def __init__(self, train_dir = None, test_dir = None, dummy_data = False, type_ = 'full'):
-
-        
+    def __init__(self, train_dir=None, test_dir=None, dummy_data=False, type_='full'):
         self.train_dir = train_dir
         self.test_dir = test_dir
         self.dummy_data = dummy_data
-        self.type_ = 'full'
+        self.type_ = type_
+        self.dataset = None
 
-    def load_local_datasets(self, train_dir="train_data/", test_dir="test_data/"):
-        """
-        Load datasets from local directories, combine them, and split based on the provided ratio.
-        
-        Parameters:
-        - train_dir (str): Path to the training data directory. Default is "train_data/".
-        - test_dir (str): Path to the testing data directory. Default is "test_data/".
-        - split_ratio (float): Ratio to split the combined dataset into training and testing. Default is 0.3.
-        
-        Returns:
-        DatasetDict: A dictionary containing the train and test datasets.
-        """
+        if self.dummy_data:
+            self.dataset = self.load_dummy_data()
+        else:
+            self.dataset = self.load_local_datasets()
+
+    def load_local_datasets(self):
+        """Load datasets from local directories."""
         hf_dataset = DatasetDict()
-        hf_dataset["train"] = load_dataset("audiofolder", data_dir=train_dir, split="train")
-        hf_dataset["test"]  = load_dataset("audiofolder", data_dir=test_dir, split="train")
+        hf_dataset["train"] = load_dataset("audiofolder", data_dir=self.train_dir, split="train")
+        hf_dataset["test"] = load_dataset("audiofolder", data_dir=self.test_dir, split="train")
         return hf_dataset
     
-    def load_dummy_data(self, type_ = 'full'):
-        """
-        Load dummy data from the `mozilla-foundation/common_voice_11_0` dataset.
-        
-        Returns:
-        DatasetDict: A dictionary containing the train and test datasets with selected columns removed.
-        """
+    def load_dummy_data(self):
+        """Load dummy data for testing purposes."""
         common_voice = DatasetDict()
+        common_voice_split = "train+validation" if self.type_ == 'full' else "train[:5]+validation[:5]"
+        common_voice["train"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", split=common_voice_split)
+        common_voice["test"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", split="test[:5]")
 
-        if type_ == 'full':
-            common_voice["train"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", 
-                                                 split="train+validation")
-            common_voice["test"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", 
-                                                split="test")
-        else:
-            common_voice["train"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", 
-                                                 split="train+validation").select(range(5))
-            common_voice["test"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", 
-                                                split="test").select(range(5))
-            
-        common_voice = common_voice.remove_columns(["accent", "age", "client_id", "down_votes", 
-                                                    "gender", "locale", "path", "segment", "up_votes"])
+        columns_to_remove = ["accent", "age", "client_id", "down_votes", "gender", "locale", "segment", "up_votes"]
+        common_voice["train"] = common_voice["train"].remove_columns(columns_to_remove)
+        common_voice["test"] = common_voice["test"].remove_columns(columns_to_remove)
         return common_voice

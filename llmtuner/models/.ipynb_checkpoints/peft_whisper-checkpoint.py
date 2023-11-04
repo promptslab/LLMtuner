@@ -20,7 +20,9 @@ class PeftWhisperModel(BaseModel):
         return BitsAndBytesConfig(load_in_8bit=True)
 
     def _apply_peft_to_model(self, model):
-        
+
+
+        self.is_peft_applied = True
         model = prepare_model_for_kbit_training(model)
         # Here, we'll apply the forward hook to make sure gradients are computed
         # for the modified layers. This function will be used as the hook.
