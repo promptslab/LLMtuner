@@ -39,10 +39,36 @@ pip3 install git+https://github.com/promptslab/LLMTuner.git
 
 ## Quick tour
 
-To fine a LLM model we provide the `Tuner` API.
+To fine a Large models we provide the `Tuner` API.
 
 ```python
-from llmtuner import 
+
+from llmtuner import Tuner, Dataset, Model, Deployment
+
+# Initialize the Whisper model with parameter-efficient fine-tuning
+model = Model("openai/whisper-small", use_peft=True)
+
+# Create a dataset instance for the audio files
+dataset = Dataset('/path/to/audio_folder')
+
+# Set up the tuner with the model and dataset for fine-tuning
+tuner = Tuner(model, dataset)
+
+# Fine-tune the model
+trained_model = tuner.fit()
+
+# Inference with Fine-tuned model
+tuner.inference('sample.wav')
+
+# Launch an interactive UI for the fine-tuned model
+tuner.launch_ui('Model Demo UI')
+
+# Set up deployment for the fine-tuned model
+deploy = Deployment('aws')  # Options: 'fastapi', 'aws', 'gcp', etc.
+
+# Launch the model deployment
+deploy.launch()
+
 ```
 
 
