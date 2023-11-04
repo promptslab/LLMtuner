@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 from .base_dataset import BaseDatasetProcessor
 
-class AudioDataProcessor(BaseDatasetProcessor):
+class AudioDatasetProcessor(BaseDatasetProcessor):
     def __init__(
         self,
         whisper_model="openai/whisper-small",

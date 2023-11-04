@@ -1,5 +1,5 @@
 from llmtuner.llmtrainer.base_trainer import BaseTrainer
-from llmtuner.inference.metrices import WERMetrics
+from llmtuner.Inference.metrices import WERMetrics
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 import torch
@@ -14,6 +14,8 @@ from transformers import (
     Seq2SeqTrainer,
     pipeline,
 )
+
+
 
 @dataclass
 class DataCollatorSpeechSeq2SeqWithPadding:
@@ -111,7 +113,7 @@ class WhisperModelTrainer(BaseTrainer):
             args=training_args,
             train_dataset=self.processed_data["train"],
             eval_dataset=self.processed_data["test"],
-            data_collator=DataCollatorForSeq2Seq(tokenizer=self.processor, model=self.model),
+            data_collator=DataCollatorSpeechSeq2SeqWithPadding(processor=self.processor),
             tokenizer=self.processor.feature_extractor,
             compute_metrics=compute_metrics
         )
