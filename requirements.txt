@@ -1,7 +1,7 @@
-datasets>=2.6.1
+datasets
 git+https://github.com/huggingface/transformers
 librosa
-evaluate>=0.30
+evaluate
 jiwer
 gradio==3.37
 accelerate
