@@ -87,7 +87,7 @@ deploy.launch()
 | Task Name | Colab Notebook | Status |
 |-------------|-------|-------|
 | Fine-Tune Whisper | [Fine-Tune Whisper](https://colab.research.google.com/drive/1j_1AcPRk4s1uivVRSwrsOfodjPv55Jpc?usp=sharing) | ✅  |
-| Fine-Tune Whisper Quantized  | [LoRA](https://colab.research.google.com/drive/1j_1AcPRk4s1uivVRSwrsOfodjPv55Jpc?usp=sharing) | ✅    |
+| Fine-Tune Whisper Quantized  | [LoRA](https://colab.research.google.com/drive/1ia9KvqEGOxARtJScPBY6ccF8l41-w_l5?usp=sharing) | ✅    |
 | Fine-Tune Llama | [Coming soon..](#) | ✅    |
 
 
