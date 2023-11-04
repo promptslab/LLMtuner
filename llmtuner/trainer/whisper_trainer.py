@@ -87,7 +87,7 @@ class WhisperModelTrainer(BaseTrainer):
             'save_steps': 5,
             'eval_steps': 5,
             'logging_steps': 5,
-            'report_to': ["wandb"],
+            'report_to': ["tensorboard"],
             'load_best_model_at_end': True
         }
 
