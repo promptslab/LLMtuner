@@ -1,15 +1,16 @@
 from datasets import load_dataset, DatasetDict
 
 class Dataset:
-    def __init__(self, train_dir=None, test_dir=None, dummy_data=False, type_='full'):
+    def __init__(self, train_dir=None, test_dir=None, dummy_data=False, type_='full', n_samples = 5):
         self.train_dir = train_dir
         self.test_dir = test_dir
         self.dummy_data = dummy_data
         self.type_ = type_
+        self.n_samples = n_samples
         self.dataset = None
 
         if self.dummy_data:
-            self.dataset = self.load_dummy_data()
+            self.dataset = self.load_dummy_data(self.type_, self.n_samples)
         else:
             self.dataset = self.load_local_datasets()
 
@@ -20,14 +21,40 @@ class Dataset:
         hf_dataset["test"] = load_dataset("audiofolder", data_dir=self.test_dir, split="train")
         return hf_dataset
     
-    def load_dummy_data(self):
-        """Load dummy data for testing purposes."""
+    def load_dummy_data(self, type_="full", n_samples = 5):
+        """
+        Load dummy data from the `mozilla-foundation/common_voice_11_0` dataset.
+        Returns:
+        DatasetDict: A dictionary containing the train and test datasets with selected columns removed.
+        """
         common_voice = DatasetDict()
-        common_voice_split = "train+validation" if self.type_ == 'full' else "train[:5]+validation[:5]"
-        common_voice["train"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", split=common_voice_split)
-        common_voice["test"] = load_dataset("mozilla-foundation/common_voice_11_0", "hi", split="test[:5]")
 
-        columns_to_remove = ["accent", "age", "client_id", "down_votes", "gender", "locale", "segment", "up_votes"]
-        common_voice["train"] = common_voice["train"].remove_columns(columns_to_remove)
-        common_voice["test"] = common_voice["test"].remove_columns(columns_to_remove)
+        if type_ == "full":
+            common_voice["train"] = load_dataset(
+                "mozilla-foundation/common_voice_11_0", "hi", split="train+validation"
+            )
+            common_voice["test"] = load_dataset(
+                "mozilla-foundation/common_voice_11_0", "hi", split="test"
+            )
+        else:
+            common_voice["train"] = load_dataset(
+                "mozilla-foundation/common_voice_11_0", "hi", split="train+validation"
+            ).select(range(n_samples))
+            common_voice["test"] = load_dataset(
+                "mozilla-foundation/common_voice_11_0", "hi", split="test"
+            ).select(range(n_samples))
+
+        common_voice = common_voice.remove_columns(
+            [
+                "accent",
+                "age",
+                "client_id",
+                "down_votes",
+                "gender",
+                "locale",
+                "path",
+                "segment",
+                "up_votes",
+            ]
+        )
         return common_voice

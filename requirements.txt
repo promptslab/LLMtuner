@@ -8,3 +8,4 @@ accelerate
 wandb
 peft
 bitsandbytes
+tensorboard
