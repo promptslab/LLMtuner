@@ -19,7 +19,7 @@
   <a href="https://discord.gg/m88xfYMbK6">
     <img src="https://img.shields.io/badge/Discord-Community-orange" alt="Community" />
   </a>
-  <a href="#">
+  <a href="https://colab.research.google.com/drive/1ia9KvqEGOxARtJScPBY6ccF8l41-w_l5?usp=sharing">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="colab" />
   </a>
 </h4>
