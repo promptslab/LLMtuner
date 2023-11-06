@@ -25,7 +25,7 @@ class Tuner:
         # Initialize and set up the trainer
         trainer = WhisperModelTrainer(model, processed_dataset, feat_processor)
         if self.training_args_dict:
-            trainer.setup_trainer(**self.training_args_dict)
+            trainer.setup_trainer(self.training_args_dict)
         else:
             trainer.setup_trainer()
 
