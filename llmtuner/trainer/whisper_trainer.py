@@ -72,28 +72,8 @@ class WhisperModelTrainer(BaseTrainer):
 
     def setup_trainer(self, training_args_dict=None):
         # Define default arguments for training
-        default_args = {
-            'output_dir': self.output_dir,
-            'per_device_train_batch_size': 8,
-            'gradient_accumulation_steps': 1,
-            'learning_rate': 1e-3,
-            'warmup_steps': 10,
-            'max_steps': 10,
-            'gradient_checkpointing': True,
-            'fp16': True,
-            'evaluation_strategy': "steps",
-            'per_device_eval_batch_size': 8,
-            'generation_max_length': 225,
-            'save_steps': 5,
-            'eval_steps': 5,
-            'logging_steps': 5,
-            'report_to': ["tensorboard"],
-            'load_best_model_at_end': True
-        }
-
-        combined_args = {**default_args, **training_args_dict} if training_args_dict else default_args
-        training_args = Seq2SeqTrainingArguments(**combined_args)
-
+        
+        training_args = Seq2SeqTrainingArguments(**training_args_dict)
         # Customize the training arguments based on the type of model
         if self.model.is_peft_applied:
             # Settings specific to PEFT model
@@ -127,14 +107,14 @@ class WhisperModelTrainer(BaseTrainer):
         self.save_model_and_processor()
 
     def push_to_hub(self, hub_push_kwargs=None):
-        hub_push_kwargs_default = {
-            "language": 'hi',
-            "model_name": self.output_dir,
-            "finetuned_from": self.model_name,
-            "tasks": "automatic-speech-recognition",
-            "tags": self.task,
-        }
-        hub_combined_args = {**hub_push_kwargs_default, **hub_push_kwargs} if hub_push_kwargs else hub_push_kwargs_default
+        # hub_push_kwargs_default = {
+        #     "language": 'hi',
+        #     "model_name": self.output_dir,
+        #     "finetuned_from": self.model_name,
+        #     "tasks": "automatic-speech-recognition",
+        #     "tags": self.task,
+        # }
+        # hub_combined_args = {**hub_push_kwargs_default, **hub_push_kwargs} if hub_push_kwargs else hub_push_kwargs_default
 
         # Call the base class's push_to_hub with combined arguments
-        self.trainer.push_to_hub(**hub_combined_args)
+        self.trainer.push_to_hub(**hub_push_kwargs)
