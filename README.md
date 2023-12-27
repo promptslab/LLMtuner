@@ -101,7 +101,7 @@ If you are interested in Fine-tuning Open source LLMs, Building scalable Large m
 ```
 
 @misc{LLMtuner2023,
-  title = {LLMTuner: Fine-Tune Llama, Whisper, and other Large Models with best practices like LoRA, QLoRA, through a sleek, scikit-learn-inspired interface.},
+  title = {LLMTuner: Fine-Tune Large Models with best practices through a sleek, scikit-learn-inspired interface.},
   author = {Pal, Ankit},
   year = {2023},
   howpublished = {\url{https://github.com/promptslab/LLMtuner}}
