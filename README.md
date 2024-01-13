@@ -39,7 +39,7 @@ pip3 install git+https://github.com/promptslab/LLMTuner.git
 
 ## Quick tour
 
-To fine a Large models we provide the `Tuner` API.
+To finetune Large models, we provide the `Tuner` API.
 
 ```python
 
